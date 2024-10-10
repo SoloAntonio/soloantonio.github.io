@@ -1,0 +1,96 @@
+---
+
+---
+<div style="width:100%;height:400px" id="main"/>
+
+<script>
+import * as echarts from 'echarts';
+import data from '../stats.json';
+
+document.addEventListener('astro:page-load', () => {
+    // This runs on first page load and after every navigation.
+  type EChartsOption = echarts.EChartsOption;
+
+  var chartDom = document.getElementById('main')!;
+  var myChart = echarts.init(chartDom, 'dark');
+  var option: EChartsOption;
+
+  option = {
+    tooltip: {
+      trigger: 'axis',
+      position: function (pt) {
+        return [pt[0], '10%'];
+      }
+    },
+    title: {
+      left: 'center',
+      text: 'Presearch Chart'
+    },
+    dataset: {
+      dimensions: 
+          ['id', 'date', 'value']
+      ,
+    source: data
+    },
+    toolbox: {
+      feature: {
+        dataZoom: {
+          yAxisIndex: 'none'
+        },
+        restore: {},
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+    },
+    yAxis: {
+      type: 'value',
+      boundaryGap: [0, '100%']
+    },
+    dataZoom: [
+      {
+        type: 'inside',
+        start: 0,
+        end: 10
+      },
+      {
+        start: 0,
+        end: 10
+      }
+    ],
+    series: [
+      {
+        name: 'PRE earned',
+        type: 'line',
+        symbol: 'none',
+        sampling: 'lttb',
+        itemStyle: {
+          color: 'rgb(255, 70, 131)'
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: 'rgb(255, 158, 68)'
+            },
+            {
+              offset: 1,
+              color: 'rgb(255, 70, 131)'
+            }
+          ])
+        },
+        encode: {
+          // Map "amount" column to x-axis.
+          x: 'date',
+          // Map "product" row to y-axis.
+          y: 'value'
+        }
+      }
+    ]
+  };
+
+  option && myChart.setOption(option);
+});
+</script>

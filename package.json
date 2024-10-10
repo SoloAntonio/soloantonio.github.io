@@ -1,0 +1,21 @@
+{
+  "name": "myblog",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.0-beta.2",
+    "@astrojs/sitemap": "^3.2.0",
+    "astro": "^5.0.0-beta.4",
+    "echarts": "^5.5.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  }
+}
